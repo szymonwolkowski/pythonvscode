@@ -6,7 +6,8 @@
 
 # save this in a database and display on a new page (this page MUST have a login feature)
 
-# Make sure you group members in differnt category based on their age 
+# Make sure you group members in differnt category based on their age fdgdf 
+#
 # (Kids(3- 12), Teens(13-19), Youth(20-35), Adult(36-64), Elders(65+) )
 # save all information in a csv file
 
