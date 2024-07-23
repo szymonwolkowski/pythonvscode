@@ -1,6 +1,7 @@
 # create a simple church age range database (Registration, Database page)
 
-# This will get the name, age, (2 columns) 
+# This will get the name, age, (2 columns)   
+
 
 #gender of the church memeber with a submit button (2 columns)
 
