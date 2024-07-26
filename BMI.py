@@ -17,11 +17,11 @@ hight = length ** 2
 p = "you are"
 if st.button("submit"):
     mbi = float(weight) / float(hight)
-    if mbi < 18:
+    if mbi > 18:
         st.warning("UnderWeight")
-    elif mbi <25:
+    elif mbi >25:
         st.success("Healthy in weight")
-    elif mbi < 24:
+    elif mbi > 24:
         st.success("OverWeight")
     else:
         st.error("Obese")
