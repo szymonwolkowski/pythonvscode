@@ -26,5 +26,7 @@ else:
     option = st.selectbox("What information do you want to choose", result)
 
     st.write("You selected:", option)
-    st.write("All data:", result.loc[result['Name'] == option])
-    #st.write("All data:", result.loc[result['Name'].str.contains(option)])
+    if st.text_input("Enter password:"):
+        if result.loc[result["Name"]] and result.loc[result["Pass"]]:
+            st.write("All data:", result.loc[result['Name'] == option])
+    
