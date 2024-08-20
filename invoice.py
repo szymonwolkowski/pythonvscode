@@ -194,19 +194,20 @@ if T == "Invoice generator":
         pdf_data = binary.read()
 
     st.write("this could take a moment")
-    if st.button("View Invoice"):
-        if name and email and invoice and date and Ddate and D and Q and PU:
-            #Write the PDF using base64
-            pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
-            #Generate the HTML to embed the PDF
-            pdf_embed = f'<embed src="data:application/pdf;base64,{pdf_base64}" type="application/pdf" width="100%" height="600px" />'
-            #Display the embedded pdf (Markdown helps us use HTML in streamlit)
-            st.markdown(pdf_embed,unsafe_allow_html=True)
-        else:
-            st.error("Sorry something isnt filled!")    
+    # if st.button("View Invoice"):
+    #     if name and email and invoice and date and Ddate and D and Q and PU:
+    #         #Write the PDF using base64
+    #         pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
+    #         #Generate the HTML to embed the PDF
+    #         pdf_embed = f'<embed src="data:application/pdf;base64,{pdf_base64}" type="application/pdf" width="100%" height="600px" />'
+    #         #Display the embedded pdf (Markdown helps us use HTML in streamlit)
+    #         st.markdown(pdf_embed,unsafe_allow_html=True)
+    #     else:
+    #         st.error("Sorry something isnt filled!")    
 
 
-
+    if name and email and invoice and date and Ddate and D and Q and PU:
+        st.download_button(label = "Download",data = pdf_data,file_name = f"Invoice{invoice}",mime = "application/pdf")
 
 
 
