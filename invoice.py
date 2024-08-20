@@ -207,7 +207,8 @@ if T == "Invoice generator":
 
 
     if name and email and invoice and date and Ddate and D and Q and PU:
-        st.download_button(label = "Download",data = pdf_data,file_name = f"Invoice{invoice}",mime = "application/pdf")
+        st.download_button(label = "Download",data = pdf_data,file_name = f"Invoice{invoice}.pdf",
+                           mime = "application/pdf")
 
 
 
