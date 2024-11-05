@@ -41,19 +41,19 @@ with l:
 with s:
     st.sidebar.button("refresh")
 
-col1,col2,col3 = st.columns([1,3,2])
+
 
 for i,row in db.iterrows():
     name,chattext = row["Name"],row["ChatText"]
     image = f'{row["userid"]}.png'
     
-    with col1:
-        st.write(name)
-    with col2:
-        st.write(chattext)
-    with col3:
-        if os.path.exists(image):
-            st.image(image)
-        else:
-            st.write("")
+    col1,col2,col3 = st.columns([1,3,2])
+    col1.write(name)
+    
+    col2.write(chattext)
+    
+    if os.path.exists(image):
+        col3.image(image)
+    else:
+        col3.write("No image uploaded")
 
