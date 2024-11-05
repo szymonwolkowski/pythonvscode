@@ -1,24 +1,59 @@
 #settings and basic variables
 import streamlit as st
 import pandas as pd
+import os
 db = pd.read_csv("chat.csv")
-Text = None
+userid = str(len(db))
 
+st.set_page_config(initial_sidebar_state="expanded")
 #text entering and procesing 
-n=st.text_input("Name:")
-t=st.text_area("Text:")
+n=st.sidebar.text_input("Name:")
+t=st.sidebar.text_area("Text:")
+OP = st.sidebar.radio("Pictures",["Yes","No"], horizontal=True)
+if OP == "Yes":
+    PD = st.sidebar.radio("Picture or Upload",["Choose",'Snap','Upload'],horizontal=True)
+    if PD == "Snap":
+        IM = st.sidebar.camera_input("make a snap")
+        if IM:
+            IMname = f'{userid}.png'
+            with open (IMname,'wb') as writeimage:
+                writeimage.write(IM.getbuffer())
+    if PD == "Upload": 
+        IM = st.sidebar.file_uploader("Upload Your Picture",type = ['jpg','jpeg','gif','png','tiff','WebP'])
 
-if (n and t):
-    Text = n+":  "+t
+        if IM:
+            IMname = f'{userid}.png'
+            with open (IMname,'wb') as writeimage:
+                writeimage.write(IM.getbuffer())
+
+
+#if (n and t):
+#    Text = n+":  "+t
 #sending
-r,l,s = st.columns(3)
-with r:
-    if st.button("Send"):
-        if (Text):
-            CSVl = {"ChatText":[Text]}
+l,s,r = st.sidebar.columns(3)
+with l:
+    if st.sidebar.button("Send"):
+        if (t and n):
+            CSVl = {'userid':[userid],"Name":[n],"ChatText":[t]}
             CSVL = pd.DataFrame(CSVl)
             TO = pd.concat([CSVL, db], ignore_index = True)
             TO.to_csv('chat.csv', index = False)
-with l:
-    st.button("refresh")
-st.table(db)             #Table <---
+with s:
+    st.sidebar.button("refresh")
+
+col1,col2,col3 = st.columns([1,3,2])
+
+for i,row in db.iterrows():
+    name,chattext = row["Name"],row["ChatText"]
+    image = f'{row["userid"]}.png'
+    
+    with col1:
+        st.write(name)
+    with col2:
+        st.write(chattext)
+    with col3:
+        if os.path.exists(image):
+            st.image(image)
+        else:
+            st.write("")
+
